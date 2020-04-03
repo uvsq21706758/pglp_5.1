@@ -1,13 +1,20 @@
 package pglp_5.ser;
 
-/**
- * Hello world!
- *
- */
-public class App 
-{
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
+
+import java.time.LocalDate;
+
+
+public enum App {
+
+   APPLICATION;
+
+public void run(final String[] args) {
+	
+}
+
+
+    public static void main(final String[] args) {
+     APPLICATION.run(args);
     }
+
 }
