@@ -22,19 +22,19 @@ public class AppTest
 	    @Test
 	    public void sauvegarder() throws IOException
 	    {
-	    	Personne1 p1= new Personne1.Builder("elgaamouss","manale", "employee", LocalDate.of(1996,8,27)).build();
+	    	Personne1 p= new Personne1.Builder("elgaamouss","manale", "employee", LocalDate.of(1996,8,27)).build();
 
 	    	
 	    	FileOutputStream file = new FileOutputStream("fichier");
 	    	ObjectOutputStream obj = new ObjectOutputStream(file);
-	    	obj.writeObject(p1); 
+	    	obj.writeObject(p); 
 	    	obj.close();
 	        
 	    }
 	    @Test
-		public void lire()throws IOException, FileNotFoundException, ClassNotFoundException {
+		public void readObject()throws IOException, FileNotFoundException, ClassNotFoundException {
 		
-				Personne1 p1 = new Personne1.Builder("elgaamouss","manale", "employee", LocalDate.of(1996,8,27)).build();
+				Personne1 p = new Personne1.Builder("elgaamouss","manale", "employee", LocalDate.of(1996,8,27)).build();
 				FileInputStream file = new FileInputStream("fichier") ;
 				ObjectInputStream obj = new ObjectInputStream(file);
 				Personne1 perso = (Personne1) obj.readObject() ;
