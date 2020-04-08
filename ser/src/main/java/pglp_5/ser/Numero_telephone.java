@@ -1,7 +1,10 @@
 package pglp_5.ser;
 
-public class Numero_telephone {
+import java.io.Serializable;
+
+public class Numero_telephone implements Serializable{
   
+	private static final long serialVersionUID = 1L;
 	private Type_tel type;
 	private String numero;
 	

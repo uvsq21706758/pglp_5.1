@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class Personne1DAO implements DAO<Personne1>,Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
 	public Personne1 create(Personne1 obj) {
 		
 		return obj;

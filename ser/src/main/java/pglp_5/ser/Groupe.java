@@ -7,6 +7,8 @@ import java.util.Iterator;
 
 
 public class Groupe implements Composite, Serializable{
+	
+	private static final long serialVersionUID = 1L;
 
 	private ArrayList<Composite> personnes = new ArrayList<Composite>();
 	

@@ -5,7 +5,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Personne1 implements Composite,Serializable{
-
+	 
+	private static final long serialVersionUID = 1L;
 	private final String nom;
      private final String prenom;
      private final String fonction;
