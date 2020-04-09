@@ -14,9 +14,7 @@ import java.time.format.DateTimeFormatter;
 
 import org.junit.*;
 
-/**
- * Unit test for simple App.
- */
+
 public class AppTest 
 {
 	    @Test

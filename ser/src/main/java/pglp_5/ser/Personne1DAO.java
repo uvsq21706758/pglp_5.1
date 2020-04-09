@@ -1,7 +1,9 @@
 package pglp_5.ser;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.nio.file.Files;
 
 public class Personne1DAO extends DAO<Personne1> implements Serializable{
 
@@ -13,24 +15,30 @@ public class Personne1DAO extends DAO<Personne1> implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	public Personne1 create(Personne1 obj) throws IOException{
-		Personne1 personne =null;
-		return personne;
+		objetout.writeObject(obj);
+		return obj;
 	}
 
 	public Personne1 find(String id) throws IOException, ClassNotFoundException{
-		Personne1 personne = null;
-		return personne;
+		File s= new File(id + ".txt");
+        Object deserializer = null;
+        if (s.exists()) {
+            byte[] content = Files.readAllBytes(s.toPath());
+            deserializer = deserialize(content);
+        }
+        Personne1 personne= (Personne1) deserializer;
+        System.out.println(personne.toString());
+        return personne;
 	}
 
 	public Personne1 update(Personne1 obj) throws IOException {
-		
-		Personne1 personne = null;
-		return personne;
+		fichier.delete();
+		this.create(obj);
+		return obj;
 	}
 
 	public void delete(Personne1 obj) {
-		
-		
+		fichier.delete();
 	}
 
 }
