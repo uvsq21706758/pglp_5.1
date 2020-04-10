@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.nio.file.Files;
 
-public class Personne1DAO extends DAO<Personne1> implements Serializable{
+public class Personne1DAO extends DAO<Personne1>{
 
 	public Personne1DAO(int id) throws IOException {
 		super(id);
@@ -27,7 +27,7 @@ public class Personne1DAO extends DAO<Personne1> implements Serializable{
             deserializer = deserialize(content);
         }
         Personne1 personne= (Personne1) deserializer;
-        System.out.println(personne.toString());
+        personne.print();
         return personne;
 	}
 
