@@ -46,7 +46,7 @@ public class Numero_telephoneDAO extends DAO<Numero_telephone>{
 	        ObjectOutputStream oos = new ObjectOutputStream(fos);
 	        oos.writeObject(obj);
 	        oos.close();
-
+	        System.out.println("Mise a jour effectuée");
 	     
 	    } else {
 	      System.out.println("fichier n'existe pas");

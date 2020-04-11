@@ -45,7 +45,7 @@ public class GroupeDAO extends DAO<Groupe>{
 	        ObjectOutputStream oos = new ObjectOutputStream(fos);
 	        oos.writeObject(obj);
 	        oos.close();
-
+	        System.out.println("Mise a jour effectuée");
 	     
 	    } else {
 	      System.out.println("fichier n'existe pas");
