@@ -1,7 +1,6 @@
 package pglp_5.ser;
 
 import java.io.*;
-import java.io.IOException;
 
 public abstract class DAO <T>{
 	
@@ -13,4 +12,17 @@ public abstract class DAO <T>{
     
 	public abstract void delete(T obj);
 	
+	public Object deserialize(final byte[] bytes) throws ClassNotFoundException,
+    IOException {
+        ByteArrayInputStream b = new ByteArrayInputStream(bytes);
+        ObjectInputStream o = new ObjectInputStream(b);
+        return o.readObject();
+    }
+	
+	public byte[] serialize(final Object obj) throws IOException {
+	        ByteArrayOutputStream b = new ByteArrayOutputStream();
+	        ObjectOutputStream o = new ObjectOutputStream(b);
+	        o.writeObject(obj);
+	        return b.toByteArray();
+	    }
 }

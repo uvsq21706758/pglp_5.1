@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.file.Files;
 
 public class Personne1DAO extends DAO<Personne1>{
 	
@@ -21,17 +22,17 @@ public class Personne1DAO extends DAO<Personne1>{
 	public Personne1 find(String id) throws IOException, ClassNotFoundException{
 		File f = new File(id);
 	    Personne1 p = null;
-	    if (f.exists()) {
-	      
-	        FileInputStream fis = new FileInputStream(f);
-	        ObjectInputStream ois = new ObjectInputStream(fis);
-	        p = (Personne1) ois.readObject();
-	        ois.close();
-	     
-	    } else {
-	      System.out.println("le fichier n'existe pas");
-	    }
-	    return p;
+	    Object deserialized = null;
+            if (f.exists()) {
+                byte[] fileContent = Files.readAllBytes(f.toPath());
+                deserialized = deserialize(fileContent);
+            } else {
+                System.out.println("Le fichier n'existe pas!");
+            }
+             p = (Personne1) deserialized;
+            p.print();
+            return p;
+        
     }
 	
 

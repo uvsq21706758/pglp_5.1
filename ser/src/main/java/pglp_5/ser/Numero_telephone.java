@@ -42,5 +42,11 @@ public class Numero_telephone implements Serializable{
 	            return false;
 	        return true;
 	    }
+
+	public void affiche() {
+		System.out.println( ": \nType: "
+                + this.type + "\nNumerp: "
+                + this.numero + "\n");
+	}
 	
 }

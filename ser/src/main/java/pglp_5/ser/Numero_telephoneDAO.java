@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.file.Files;
 
 
 public class Numero_telephoneDAO extends DAO<Numero_telephone>{
@@ -24,17 +25,16 @@ public class Numero_telephoneDAO extends DAO<Numero_telephone>{
 	public Numero_telephone find(String id) throws IOException, ClassNotFoundException {
 		File f = new File(id);
 		Numero_telephone num = null;
-	    if (f.exists()) {
-	      
-	        FileInputStream fis = new FileInputStream(f);
-	        ObjectInputStream ois = new ObjectInputStream(fis);
-	        num = (Numero_telephone) ois.readObject();
-	        ois.close();
-	     
-	    } else {
-	      System.out.println("le fichier n'existe pas");
-	    }
-	    return num;
+	    Object deserialized = null;
+            if (f.exists()) {
+                byte[] fileContent = Files.readAllBytes(f.toPath());
+                deserialized = deserialize(fileContent);
+            } else {
+                System.out.println("Le fichier n'existe pas!");
+            }
+            num = (Numero_telephone) deserialized;
+            num.affiche();
+            return num;
 	}
 
 	@Override

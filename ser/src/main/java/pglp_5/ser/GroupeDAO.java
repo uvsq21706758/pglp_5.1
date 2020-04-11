@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.file.Files;
 
 public class GroupeDAO extends DAO<Groupe>{
 
@@ -23,17 +24,16 @@ public class GroupeDAO extends DAO<Groupe>{
 	public Groupe find(String id) throws IOException, ClassNotFoundException {
 		File f = new File(id);
 		Groupe grp = null;
-	    if (f.exists()) {
-	      
-	        FileInputStream fis = new FileInputStream(f);
-	        ObjectInputStream ois = new ObjectInputStream(fis);
-	        grp = (Groupe) ois.readObject();
-	        ois.close();
-	     
-	    } else {
-	      System.out.println("le fichier n'existe pas");
-	    }
-	    return grp;
+	    Object deserialized = null;
+            if (f.exists()) {
+                byte[] fileContent = Files.readAllBytes(f.toPath());
+                deserialized = deserialize(fileContent);
+            } else {
+                System.out.println("Le fichier n'existe pas!");
+            }
+            grp = (Groupe) deserialized;
+            grp.print();
+            return grp;
 	}
 
 	@Override
