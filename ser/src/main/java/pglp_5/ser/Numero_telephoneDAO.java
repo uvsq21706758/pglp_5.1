@@ -1,45 +1,68 @@
 package pglp_5.ser;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Files;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 
 public class Numero_telephoneDAO extends DAO<Numero_telephone>{
 
-	public Numero_telephoneDAO(int id) throws IOException {
-		super(id);
-		// TODO Auto-generated constructor stub
-	}
-
-	@Override
+    @Override
 	public Numero_telephone create(Numero_telephone obj) throws IOException {
-		objetout.writeObject(obj);
-		return obj;
+    	 FileOutputStream fos = new FileOutputStream(obj.getNumero());
+	      ObjectOutputStream oos = new ObjectOutputStream(fos);
+	      oos.writeObject(obj);
+	      oos.close();
+	        System.out.println("Le fichier est créé!");
+	        return obj;
 	}
 
 	@Override
 	public Numero_telephone find(String id) throws IOException, ClassNotFoundException {
-		File s= new File(id + ".txt");
-        Object deserializer = null;
-        if (s.exists()) {
-            byte[] content = Files.readAllBytes(s.toPath());
-            deserializer = deserialize(content);
-        }
-        Numero_telephone numero_tel= (Numero_telephone) deserializer;
-        System.out.println(numero_tel.toString());
-        return numero_tel;
+		File f = new File(id);
+		Numero_telephone num = null;
+	    if (f.exists()) {
+	      
+	        FileInputStream fis = new FileInputStream(f);
+	        ObjectInputStream ois = new ObjectInputStream(fis);
+	        num = (Numero_telephone) ois.readObject();
+	        ois.close();
+	     
+	    } else {
+	      System.out.println("le fichier n'existe pas");
+	    }
+	    return num;
 	}
 
 	@Override
 	public Numero_telephone update(Numero_telephone obj) throws IOException {
-		fichier.delete();
-		this.create(obj);
-		return obj;
+		File f = new File(obj.getNumero());
+	    if (f.exists()) {
+	      
+	        FileOutputStream fos = new FileOutputStream(f);
+	        ObjectOutputStream oos = new ObjectOutputStream(fos);
+	        oos.writeObject(obj);
+	        oos.close();
+
+	     
+	    } else {
+	      System.out.println("fichier n'existe pas");
+	    }
+
+        return obj;
 	}
 
 	@Override
 	public void delete(Numero_telephone obj) {
-		fichier.delete();
+		 File f = new File(obj.getNumero());
+		    if (f.exists() && f.delete()) {
+		      System.out.println("fichier supprimé");
+		    } else {
+		      System.out.println("fichier n'existe pas");
+		    }
 	}
 
 }

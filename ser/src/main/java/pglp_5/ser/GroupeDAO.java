@@ -1,45 +1,67 @@
 package pglp_5.ser;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Files;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 public class GroupeDAO extends DAO<Groupe>{
 
-	public GroupeDAO(int id) throws IOException {
-		super(id);
-		// TODO Auto-generated constructor stub
-	}
-
 	@Override
 	public Groupe create(Groupe obj) throws IOException {
-		objetout.writeObject(obj);
-		return obj;
+		 FileOutputStream fos = new FileOutputStream(obj.getNom());
+	      ObjectOutputStream oos = new ObjectOutputStream(fos);
+	      oos.writeObject(obj);
+	      oos.close();
+	        System.out.println("Le fichier est créé!");
+	        return obj;
 	}
 
 	@Override
 	public Groupe find(String id) throws IOException, ClassNotFoundException {
-		File s= new File(id + ".txt");
-        Object deserializer = null;
-        if (s.exists()) {
-            byte[] content = Files.readAllBytes(s.toPath());
-            deserializer = deserialize(content);
-        }
-        Groupe groupe= (Groupe) deserializer;
-        System.out.println(groupe.toString());
-        return groupe;
+		File f = new File(id);
+		Groupe grp = null;
+	    if (f.exists()) {
+	      
+	        FileInputStream fis = new FileInputStream(f);
+	        ObjectInputStream ois = new ObjectInputStream(fis);
+	        grp = (Groupe) ois.readObject();
+	        ois.close();
+	     
+	    } else {
+	      System.out.println("le fichier n'existe pas");
+	    }
+	    return grp;
 	}
 
 	@Override
 	public Groupe update(Groupe obj) throws IOException {
-		fichier.delete();
-		this.create(obj);
-		return obj;
+		File f = new File(obj.getNom());
+	    if (f.exists()) {
+	      
+	        FileOutputStream fos = new FileOutputStream(f);
+	        ObjectOutputStream oos = new ObjectOutputStream(fos);
+	        oos.writeObject(obj);
+	        oos.close();
+
+	     
+	    } else {
+	      System.out.println("fichier n'existe pas");
+	    }
+
+        return obj;
 	}
 
 	@Override
 	public void delete(Groupe obj) {
-		fichier.delete();
+		 File f = new File(obj.getNom());
+		    if (f.exists() && f.delete()) {
+		      System.out.println("fichier supprimé");
+		    } else {
+		      System.out.println("fichier n'existe pas");
+		    }
 	}
 
 }

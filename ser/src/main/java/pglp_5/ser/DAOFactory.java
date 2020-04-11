@@ -1,17 +1,20 @@
 package pglp_5.ser;
 
+import java.io.IOException;
+
 public class DAOFactory {
-	
-	public static DAO<Personne1> getPersonne1DAO(){ 
-			return  getPersonne1DAO();
+	 
+	 public static DAO<Numero_telephone> getNumero_telephoneDAO() throws IOException{
+		return new Numero_telephoneDAO();
+		}
+	 
+	public static DAO<Personne1> getPersonne1DAO() throws IOException{ 
+			return new Personne1DAO();
 		}
 	
-	public static DAO<Numero_telephone> getNumero_telephoneDAO(){
-		return getNumero_telephoneDAO();
-		}
-	
-    public static DAO<Groupe> getGroupe() {
-		        return getGroupe();
+    public static DAO<Groupe> getGroupe() throws IOException{
+		        return new GroupeDAO();
 		        
 		 }
+    
 }

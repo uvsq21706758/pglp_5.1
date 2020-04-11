@@ -34,7 +34,7 @@ public class Groupe implements Composite, Serializable{
 		personnes.remove(composant);
 	}
 	 public String getNom() {
-	        return this.nom;
+	        return nom;
 	    }
 	 public void hierarchique() {
 	        Iterator<Composite> iterator = personnes.iterator();
@@ -44,4 +44,26 @@ public class Groupe implements Composite, Serializable{
 	            comp.print();
 	        }
 	 }
+	 @Override
+	    public boolean equals(Object obj) {
+	        if (this == obj)
+	            return true;
+	        if (obj == null)
+	            return false;
+	        if (getClass() != obj.getClass())
+	            return false;
+	        Groupe other = (Groupe) obj;
+	        if (personnes == null) {
+	            if (other.personnes != null)
+	                return false;
+	        } else if (!personnes.equals(other.personnes))
+	            return false;
+	        if (nom == null) {
+	            if (other.nom != null)
+	                return false;
+	        } else if (!nom.equals(other.nom))
+	            return false;
+	        return true;
+	    }
+	 
 }
