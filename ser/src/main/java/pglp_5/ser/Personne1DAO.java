@@ -11,7 +11,7 @@ import java.nio.file.Files;
 public class Personne1DAO extends DAO<Personne1>{
 	
 	public Personne1 create(Personne1 obj) throws IOException{
-		 FileOutputStream fos = new FileOutputStream(obj.getNom());
+		 FileOutputStream fos = new FileOutputStream(obj.getNom()+".txt");
 	      ObjectOutputStream oos = new ObjectOutputStream(fos);
 	      oos.writeObject(obj);
 	      oos.close();
@@ -37,7 +37,7 @@ public class Personne1DAO extends DAO<Personne1>{
 	
 
 	public Personne1 update(Personne1 obj) throws IOException {
-		 File f = new File(obj.getNom());
+		 File f = new File(obj.getNom()+".txt");
 		    if (f.exists()) {
                 FileOutputStream fos = new FileOutputStream(f);
 		        ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -53,7 +53,7 @@ public class Personne1DAO extends DAO<Personne1>{
 	}
 
 	public void delete(Personne1 obj) {
-		 File f = new File(obj.getNom());
+		 File f = new File(obj.getNom()+".txt");
 		    if (f.exists() && f.delete()) {
 		      System.out.println("fichier supprimé");
 		    } else {

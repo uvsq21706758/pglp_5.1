@@ -62,7 +62,7 @@ public class AppTest {
 	    	
 	        personne.create(employee);
 	        
-	        File search = new File(employee.getNom());
+	        File search = new File(employee.getNom()+".txt");
 	        Object deserialized = null;
 	        
 	        byte[] fileContent = Files.readAllBytes(search.toPath());
@@ -80,7 +80,7 @@ public class AppTest {
 	        Builder b = new Builder("hadir", "julia", "chef de projet",LocalDate.of(1992,3,2));
 	        b.Num_telephone(portable);
 	        Personne1 chef = b.build();
-	       File search = new File(chef.getNom());
+	       File search = new File(chef.getNom()+".txt");
 	        personne.create(chef);
 	        assertTrue(search.exists());
 	        personne.delete(chef);
@@ -90,7 +90,7 @@ public class AppTest {
 	    @Test
 	    public void updateTest() throws IOException, ClassNotFoundException {  
 	    	personne= DAOFactory.getPersonne1DAO();
-	        File search = new File(employee.getNom());
+	        File search = new File(employee.getNom()+".txt");
 
 	        personne.create(employee);
 	        personne.update(employee);
@@ -107,7 +107,7 @@ public class AppTest {
 	    
 	  @Test
 	    public void findTest() throws IOException, ClassNotFoundException {  
-	        File search = new File(employee.getNom());
+	        File search = new File(employee.getNom()+".txt");
 	        Personne1 expected;
 	        personne.create(employee);
 	        expected = personne.find("elgaamouss");
